@@ -27,8 +27,8 @@ RUN sed -i '/^;date.timezone/c\date.timezone = "Europe/Madrid"' /etc/php/8.0/cli
     sed -i '/^max_file_uploads = 20/c\max_file_uploads = 50' /etc/php/8.0/fpm/php.ini && \
     sed -i '/^display_errors = Off/c\display_errors = On' /etc/php/8.0/fpm/php.ini && \
     sed -i '/^default_socket_timeout = 60/c\default_socket_timeout = -1' /etc/php/8.0/cli/php.ini && \
-    sed -i '/^post_max_size = 8M/c\post_max_size = 150M' /etc/php/8.0/cli/php.ini && \
-    sed -i '/^upload_max_filesize = 2M/c\upload_max_filesize = 150M' /etc/php/8.0/cli/php.ini
+    sed -i '/^post_max_size = 8M/c\post_max_size = 150M' /etc/php/8.0/fpm/php.ini && \
+    sed -i '/^upload_max_filesize = 2M/c\upload_max_filesize = 150M' /etc/php/8.0/fpm/php.ini
 
 # XDEBUG CONFIGURATION
 RUN echo "xdebug.remote_autostart = 1" >> /etc/php/8.0/mods-available/xdebug.ini && \
