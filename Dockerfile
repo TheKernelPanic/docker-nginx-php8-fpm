@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ENV APPLICATION_DIRECTORY="work-directory"
+ENV TIMEZONE="UTC"
 
 RUN apt update && \
     apt install nginx nano -y
@@ -12,8 +13,7 @@ RUN apt install software-properties-common -y && \
     add-apt-repository ppa:ondrej/php && \
     apt update
 
-ENV TZ=Europe/Madrid
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TIMEZONE > /etc/timezone
 
 # PHP INSTALLATION
 ENV PHP_VERSION=8.0
@@ -22,8 +22,8 @@ RUN apt install php8.0-fpm -y
 RUN apt install php8.0-common php8.0-mysql php8.0-xml php8.0-curl php8.0-gd php8.0-imagick php8.0-cli php8.0-dev php8.0-imap php8.0-mbstring php8.0-opcache php8.0-soap php8.0-zip php8.0-pgsql php8.0-xdebug php8.0-redis -y
 
 # PHP CONFIGURATION
-RUN sed -i '/^;date.timezone/c\date.timezone = "Europe/Madrid"' /etc/php/8.0/cli/php.ini && \
-    sed -i '/^;date.timezone/c\date.timezone = "Europe/Madrid"' /etc/php/8.0/fpm/php.ini && \
+RUN sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/8.0/cli/php.ini && \
+    sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/8.0/fpm/php.ini && \
     sed -i '/^max_file_uploads = 20/c\max_file_uploads = 50' /etc/php/8.0/fpm/php.ini && \
     sed -i '/^display_errors = Off/c\display_errors = On' /etc/php/8.0/fpm/php.ini && \
     sed -i '/^default_socket_timeout = 60/c\default_socket_timeout = -1' /etc/php/8.0/cli/php.ini && \
