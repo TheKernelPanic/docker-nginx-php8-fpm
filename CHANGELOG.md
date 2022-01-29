@@ -1,4 +1,11 @@
 # Change log 
+___
+
+## 2.0.0 (29/01/2022)
+
+### Changed
+
+Add *INTL* extension for php and remove *xDebug* ports.
 
 ___
 

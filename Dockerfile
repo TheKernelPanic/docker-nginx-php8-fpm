@@ -19,7 +19,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TIMEZONE > /etc/time
 ENV PHP_VERSION=8.0
 RUN apt install php$PHP_VERSION -y
 RUN apt install php$PHP_VERSION-fpm -y
-RUN apt install php$PHP_VERSION-common php$PHP_VERSION-mysql php$PHP_VERSION-xml php$PHP_VERSION-curl php$PHP_VERSION-gd php$PHP_VERSION-imagick php$PHP_VERSION-cli php$PHP_VERSION-dev php$PHP_VERSION-imap php$PHP_VERSION-mbstring php$PHP_VERSION-opcache php$PHP_VERSION-soap php$PHP_VERSION-zip php$PHP_VERSION-pgsql php$PHP_VERSION-xdebug php$PHP_VERSION-redis -y
+RUN apt install php$PHP_VERSION-common php$PHP_VERSION-mysql php$PHP_VERSION-xml php$PHP_VERSION-curl php$PHP_VERSION-gd php$PHP_VERSION-imagick php$PHP_VERSION-cli php$PHP_VERSION-dev php$PHP_VERSION-imap php$PHP_VERSION-mbstring php$PHP_VERSION-opcache php$PHP_VERSION-soap php$PHP_VERSION-zip php$PHP_VERSION-pgsql php$PHP_VERSION-intl php$PHP_VERSION-xdebug php$PHP_VERSION-redis -y
 
 # PHP CONFIGURATION
 RUN sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/$PHP_VERSION/cli/php.ini && \
@@ -55,6 +55,6 @@ WORKDIR /var/www/$APPLICATION_DIRECTORY
 
 VOLUME /var/www/$APPLICATION_DIRECTORY
 
-EXPOSE 80 9001 9000
+EXPOSE 80
 
 CMD service nginx start && service php8.0-fpm start && /bin/bash
