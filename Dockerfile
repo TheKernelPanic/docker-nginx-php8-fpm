@@ -17,25 +17,25 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TIMEZONE > /etc/time
 
 # PHP INSTALLATION
 ENV PHP_VERSION=8.0
-RUN apt install php8.0 -y
-RUN apt install php8.0-fpm -y
-RUN apt install php8.0-common php8.0-mysql php8.0-xml php8.0-curl php8.0-gd php8.0-imagick php8.0-cli php8.0-dev php8.0-imap php8.0-mbstring php8.0-opcache php8.0-soap php8.0-zip php8.0-pgsql php8.0-xdebug php8.0-redis -y
+RUN apt install php$PHP_VERSION -y
+RUN apt install php$PHP_VERSION-fpm -y
+RUN apt install php$PHP_VERSION-common php$PHP_VERSION-mysql php$PHP_VERSION-xml php$PHP_VERSION-curl php$PHP_VERSION-gd php$PHP_VERSION-imagick php$PHP_VERSION-cli php$PHP_VERSION-dev php$PHP_VERSION-imap php$PHP_VERSION-mbstring php$PHP_VERSION-opcache php$PHP_VERSION-soap php$PHP_VERSION-zip php$PHP_VERSION-pgsql php$PHP_VERSION-xdebug php$PHP_VERSION-redis -y
 
 # PHP CONFIGURATION
-RUN sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/8.0/cli/php.ini && \
-    sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/8.0/fpm/php.ini && \
-    sed -i '/^max_file_uploads = 20/c\max_file_uploads = 50' /etc/php/8.0/fpm/php.ini && \
-    sed -i '/^display_errors = Off/c\display_errors = On' /etc/php/8.0/fpm/php.ini && \
-    sed -i '/^default_socket_timeout = 60/c\default_socket_timeout = -1' /etc/php/8.0/cli/php.ini && \
-    sed -i '/^post_max_size = 8M/c\post_max_size = 150M' /etc/php/8.0/fpm/php.ini && \
-    sed -i '/^upload_max_filesize = 2M/c\upload_max_filesize = 150M' /etc/php/8.0/fpm/php.ini
+RUN sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/$PHP_VERSION/cli/php.ini && \
+    sed -i "/^;date.timezone/c\date.timezone = \"$TIMEZONE\"" /etc/php/$PHP_VERSION/fpm/php.ini && \
+    sed -i '/^max_file_uploads = 20/c\max_file_uploads = 50' /etc/php/$PHP_VERSION/fpm/php.ini && \
+    sed -i '/^display_errors = Off/c\display_errors = On' /etc/php/$PHP_VERSION/fpm/php.ini && \
+    sed -i '/^default_socket_timeout = 60/c\default_socket_timeout = -1' /etc/php/$PHP_VERSION/cli/php.ini && \
+    sed -i '/^post_max_size = 8M/c\post_max_size = 150M' /etc/php/$PHP_VERSION/fpm/php.ini && \
+    sed -i '/^upload_max_filesize = 2M/c\upload_max_filesize = 150M' /etc/php/$PHP_VERSION/fpm/php.ini
 
 # XDEBUG CONFIGURATION
-RUN echo "xdebug.remote_autostart = 1" >> /etc/php/8.0/mods-available/xdebug.ini && \
-    echo "xdebug.remote_enable = 1" >> /etc/php/8.0/mods-available/xdebug.ini && \
-    echo "xdebug.remote_host = 127.0.0.1" >> /etc/php/8.0/mods-available/xdebug.ini && \
-    echo "xdebug.remote_log = /tmp/xdebug_remote.log" >> /etc/php/8.0/mods-available/xdebug.ini && \
-    echo "xdebug.remote_port = 9001" >> /etc/php/8.0/mods-available/xdebug.ini
+RUN echo "xdebug.remote_autostart = 1" >> /etc/php/$PHP_VERSION/mods-available/xdebug.ini && \
+    echo "xdebug.remote_enable = 1" >> /etc/php/$PHP_VERSION/mods-available/xdebug.ini && \
+    echo "xdebug.remote_host = 127.0.0.1" >> /etc/php/$PHP_VERSION/mods-available/xdebug.ini && \
+    echo "xdebug.remote_log = /tmp/xdebug_remote.log" >> /etc/php/$PHP_VERSION/mods-available/xdebug.ini && \
+    echo "xdebug.remote_port = 9001" >> /etc/php/$PHP_VERSION/mods-available/xdebug.ini
 
 # INSTALL COMPOSER
 RUN cd ~ && \
