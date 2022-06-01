@@ -1,4 +1,12 @@
 # Change log 
+
+___
+
+## 2.1.0 (01/06/2022)
+
+### Changed
+
+Update PHP version to __8.1__.
 ___
 
 ## 2.0.0 (29/01/2022)
