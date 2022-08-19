@@ -13,7 +13,7 @@ RUN apt install software-properties-common -y && \
     add-apt-repository ppa:ondrej/php && \
     apt update
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TIMEZONE > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /etc/timezone
 
 # PHP INSTALLATION
 ENV PHP_VERSION=8.1

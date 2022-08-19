@@ -2,6 +2,13 @@
 
 ___
 
+## 2.1.1 (19/08/2022)
+
+### Fixed
+
+Fix timezone variable name.
+___
+
 ## 2.1.0 (01/06/2022)
 
 ### Changed
