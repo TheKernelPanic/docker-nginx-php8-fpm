@@ -1,6 +1,12 @@
 # Change log 
 
 ___
+## 2.1.2 (04/09/2022)
+
+### Fixed
+
+Fix version fpm on nginx configuration file.
+___
 
 ## 2.1.1 (19/08/2022)
 
